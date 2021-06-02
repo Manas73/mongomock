@@ -2067,7 +2067,10 @@ def _current_date_updater(doc, field_name, value):
         else:
             doc[field_name] = mongomock.utcnow()
 
-
+async def to_list(self, length):
+        result = [doc for doc in self]
+        return result[:length]
+    
 _updaters = {
     '$set': _set_updater,
     '$unset': _unset_updater,
