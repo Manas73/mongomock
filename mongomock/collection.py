@@ -1679,7 +1679,7 @@ class Collection(object):
         return self.map_reduce(
             map_func, reduce_func, {'inline': 1}, full_response, query, limit, session=session)
 
-    def distinct(self, key, filter=None, session=None):
+    async def distinct(self, key, filter=None, session=None):
         if session:
             raise_not_implemented('session', 'Mongomock does not handle sessions yet')
         return self.find(filter).distinct(key)
