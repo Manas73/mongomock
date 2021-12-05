@@ -1,5 +1,3 @@
-
-
 class CommandCursor(object):
 
     def __init__(self, collection, curser_info=None, address=None, retrieved=0):
@@ -38,3 +36,12 @@ class CommandCursor(object):
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         return
+
+    def __aiter__(self):
+        return self
+
+    async def __anext__(self):
+        try:
+            return next(self._collection)
+        except StopIteration:
+            raise StopAsyncIteration
